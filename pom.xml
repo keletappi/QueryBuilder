@@ -33,12 +33,14 @@
         </dependency>
 
         <!-- MongoDB -->
+        <!--
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver</artifactId>
             <version>3.5.0</version>
             <scope>provided</scope>
         </dependency>
+    -->
 
         <!-- junit -->
         <dependency>
@@ -99,6 +101,7 @@
                             </execution>
                         </executions>
                     </plugin>
+
                 </plugins>
             </build>
         </profile>
@@ -141,6 +144,21 @@
                     <goals>deploy</goals>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.smoope.utils</groupId>
+                <artifactId>j2objc-maven-plugin</artifactId>
+                <version>1.1.4</version>
+                <configuration>
+                    <j2objcPath>${J2OBJC_DISTRIBUTION}/j2objc</j2objcPath>
+                    <noPackageDirectories>true</noPackageDirectories>
+                    <!-- default value -->
+                    <sourcePath>${project.basedir}/src/main/java</sourcePath>
+                    <!-- default value -->
+                    <d>${project.build.directory}/j2objc</d>
+                </configuration>
+            </plugin>
+
         </plugins>
         <!-- 配置java版本 不配置的话默认父类配置的是1.6-->
         <pluginManagement>
