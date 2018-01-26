@@ -558,7 +558,7 @@ public class JacksonAnnotationIntrospector
         JsonSubTypes.Type[] types = t.value();
         ArrayList<NamedType> result = new ArrayList<NamedType>(types.length);
         for (JsonSubTypes.Type type : types) {
-            result.add(new NamedType(type.value(), type.name()));
+            result.add(new NamedType(type.subtype(), type.name()));
         }
         return result;
     }

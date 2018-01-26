@@ -38,7 +38,7 @@ public @interface JsonSubTypes {
         /**
          * Class of the subtype
          */
-        public Class<?> value();
+        public Class<?> subtype();
 
         /**
          * Logical type name used as the type identifier for the class
