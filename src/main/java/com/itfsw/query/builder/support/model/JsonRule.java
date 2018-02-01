@@ -16,7 +16,7 @@
 
 package com.itfsw.query.builder.support.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -72,9 +72,9 @@ public class JsonRule implements IGroup, IRule {
      */
     @Override
     public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
+        Gson mapper = new Gson();
         try {
-            return mapper.writeValueAsString(this);
+            return mapper.toJson(this);
         } catch (Exception e) {
             return super.toString();
         }

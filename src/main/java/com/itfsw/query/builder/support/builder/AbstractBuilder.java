@@ -16,8 +16,7 @@
 
 package com.itfsw.query.builder.support.builder;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.itfsw.query.builder.exception.ParserNotFoundException;
 import com.itfsw.query.builder.support.filter.IRuleFilter;
 import com.itfsw.query.builder.support.model.JsonRule;
@@ -38,16 +37,14 @@ import java.util.List;
  * ---------------------------------------------------------------------------
  */
 public abstract class AbstractBuilder {
-    private static ObjectMapper mapper; // object mapper
+    private static Gson mapper; // object mapper
     private IGroupParser groupParser;   // group parser
     private List<IRuleParser> ruleParsers;  // rule ruleParsers
     private List<IRuleFilter> ruleFilters;  // rule filters
 
     static {
         // object mapper
-        mapper = new ObjectMapper();
-
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper = new Gson();
     }
 
     /**
@@ -68,7 +65,7 @@ public abstract class AbstractBuilder {
      * @return
      */
     protected Object parse(String query) throws IOException {
-        JsonRule jsonRule = mapper.readValue(query, JsonRule.class);
+        JsonRule jsonRule = mapper.fromJson(query, JsonRule.class);
         // json rule parse
         return new JsonRuleParser(getBuilderType(), groupParser, ruleParsers, ruleFilters).parse(jsonRule);
     }
